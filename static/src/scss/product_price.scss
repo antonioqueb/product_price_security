@@ -1,0 +1,6 @@
+    /* Ocultar el texto de impuestos incluidos para usuarios sin permiso */
+    body:not(.o_group_product_price_viewer) {
+        div[name="tax_string"] {
+            display: none !important;
+        }
+    }

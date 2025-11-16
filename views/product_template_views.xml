@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Vista Formulario -->
+    <record id="product_template_price_security_form" model="ir.ui.view">
+        <field name="name">product.template.price.security.form</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//label[@for='list_price']" position="attributes">
+                <attribute name="for">list_price_display</attribute>
+            </xpath>
+            <field name="list_price" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="list_price" position="after">
+                <field name="list_price_display" 
+                    widget="monetary" 
+                    options="{'currency_field': 'currency_id'}"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Vista Lista -->
+    <record id="product_template_price_security_list" model="ir.ui.view">
+        <field name="name">product.template.price.security.list</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_tree_view"/>
+        <field name="arch" type="xml">
+            <field name="list_price" position="after">
+                <field name="list_price_display" 
+                    string="Precio de Venta" 
+                    widget="monetary" 
+                    options="{'currency_field': 'currency_id'}" 
+                    optional="show" 
+                    decoration-muted="not sale_ok"/>
+            </field>
+            <field name="list_price" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Vista Kanban -->
+    <record id="product_template_price_security_kanban" model="ir.ui.view">
+        <field name="name">product.template.price.security.kanban</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_kanban_view"/>
+        <field name="arch" type="xml">
+            <field name="list_price" position="before">
+                <field name="list_price_display"/>
+            </field>
+            <field name="list_price" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>

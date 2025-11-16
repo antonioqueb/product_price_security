@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="group_product_price_viewer" model="res.groups">
+        <field name="name">Ver Precio de Venta de Productos</field>
+        <field name="comment">Usuarios que pueden ver el precio de venta real de los productos</field>
+    </record>
+</odoo>
