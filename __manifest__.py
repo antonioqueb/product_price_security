@@ -1,7 +1,7 @@
 ## ./__manifest__.py
 {
     'name': 'Product Price Security',
-    'version': '19.0.1.0.0',
+    'version': '19.0.1.1.0',
     'category': 'Product',
     'author': 'Alphaqueb Consulting SAS',
     'website': 'https://www.alphaqueb.com',
