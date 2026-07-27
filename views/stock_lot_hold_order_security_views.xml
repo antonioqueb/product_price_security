@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- =================================================================
+         Holds sin precios para perfiles sin "Ver Precio de Venta de
+         Productos" (p. ej. el perfil de solo inventario): ven las órdenes
+         de reserva, placas, m² y fechas, pero NINGUNA columna de precio.
+         Los reportes CON precios también quedan restringidos al grupo
+         (las variantes "sin precios" siguen disponibles para todos).
+         ================================================================= -->
+
+    <!-- Líneas del hold: Precio/m² y Total solo para el grupo de precios. -->
+    <record id="view_hold_order_line_tree_price_security" model="ir.ui.view">
+        <field name="name">stock.lot.hold.order.line.tree.price.security</field>
+        <field name="model">stock.lot.hold.order.line</field>
+        <field name="inherit_id" ref="stock_lot_dimensions.view_stock_lot_hold_order_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="precio_unitario" position="attributes">
+                <attribute name="groups">product_price_security.group_product_price_viewer</attribute>
+            </field>
+            <field name="precio_total" position="attributes">
+                <attribute name="groups">product_price_security.group_product_price_viewer</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Lista de holds: total con precio solo para el grupo de precios. -->
+    <record id="view_hold_order_tree_price_security" model="ir.ui.view">
+        <field name="name">stock.lot.hold.order.tree.price.security</field>
+        <field name="model">stock.lot.hold.order</field>
+        <field name="inherit_id" ref="stock_lot_dimensions.view_stock_lot_hold_order_tree"/>
+        <field name="arch" type="xml">
+            <field name="total_con_precio" position="attributes">
+                <attribute name="groups">product_price_security.group_product_price_viewer</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Formulario del hold: total con precio solo para el grupo de precios. -->
+    <record id="view_hold_order_form_price_security" model="ir.ui.view">
+        <field name="name">stock.lot.hold.order.form.price.security</field>
+        <field name="model">stock.lot.hold.order</field>
+        <field name="inherit_id" ref="stock_lot_dimensions.view_stock_lot_hold_order_form"/>
+        <field name="arch" type="xml">
+            <field name="total_con_precio" position="attributes">
+                <attribute name="groups">product_price_security.group_product_price_viewer</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- Reportes CON precios: el botón de imprimir solo aparece para el
+         grupo de precios. Los reportes "sin precios" quedan para todos. -->
+    <record id="stock_lot_dimensions.action_report_stock_lot_hold_order_detail" model="ir.actions.report">
+        <field name="groups_id" eval="[(4, ref('product_price_security.group_product_price_viewer'))]"/>
+    </record>
+
+    <record id="stock_lot_dimensions.action_report_stock_lot_hold_order_summary" model="ir.actions.report">
+        <field name="groups_id" eval="[(4, ref('product_price_security.group_product_price_viewer'))]"/>
+    </record>
+</odoo>
