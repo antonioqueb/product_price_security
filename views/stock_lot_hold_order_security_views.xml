@@ -47,13 +47,9 @@
         </field>
     </record>
 
-    <!-- Reportes CON precios: el botón de imprimir solo aparece para el
-         grupo de precios. Los reportes "sin precios" quedan para todos. -->
-    <record id="stock_lot_dimensions.action_report_stock_lot_hold_order_detail" model="ir.actions.report">
-        <field name="groups_id" eval="[(4, ref('product_price_security.group_product_price_viewer'))]"/>
-    </record>
-
-    <record id="stock_lot_dimensions.action_report_stock_lot_hold_order_summary" model="ir.actions.report">
-        <field name="groups_id" eval="[(4, ref('product_price_security.group_product_price_viewer'))]"/>
-    </record>
+    <!-- Reportes CON precios: la restricción al grupo de precios se aplica
+         por código con detección del campo real (en Odoo 19 el campo
+         'groups_id' de ir.actions.report cambió y un <record> fijo tumbaba
+         la carga del registro). Idempotente. -->
+    <function model="ir.actions.report" name="_pps_restrict_hold_price_reports"/>
 </odoo>
